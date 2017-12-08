@@ -1,0 +1,10 @@
+include ':app'
+include ':news'
+
+
+include ':basiclib'
+include ':basicres'
+include ':build-gradle'
+include ':componentlib'
+include ':componentservice'
+

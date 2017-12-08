@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorTheme</item>
+        <item name="colorPrimaryDark">@color/colorTheme</item>
+        <item name="colorAccent">@color/colorTheme</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Progress.Dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
+    <!--查看大图页面，全屏显示-->
+    <style name="ViewBigPicTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorTheme</item>
+        <item name="colorPrimaryDark">@color/colorTheme</item>
+        <item name="colorAccent">@color/colorTheme</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--用于滑动的toolbar-->
+    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <!--菜单item-->
+    <style name="menuItem">
+        <item name="android:background">@drawable/ripple_item_white</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:textColor">@color/text_common</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">componentservice</string>
+
+    <string name="loading">努力加载中&#8230;</string>
+    <string name="nomore_loading">没有更多内容了</string>
+    <string name="refreshing">正在刷新&#8230;</string>
+    <string name="refresh_done">刷新完成&#8230;</string>
+    <string name="loading_failed">加载失败,点击重试</string>
+    <string name="listview_header_hint_normal">下拉刷新&#8230;</string>
+    <string name="listview_header_hint_release">释放刷新&#8230;</string>
+    <string name="action_share">分享</string>
+</resources>

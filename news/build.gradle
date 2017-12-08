@@ -1,0 +1,54 @@
+//apply plugin: 'com.android.library'
+apply plugin: 'com.chengheaven.comgradle'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.3'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        debug {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/NOTICE' // will not include NOTICE file
+        exclude 'META-INF/LICENSE' // will not include LICENSE file
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix "news_"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':componentservice')
+    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
+
+}
+
+combuild {
+    applicatonName = 'com.github.chengheaven.movie.runalone.application.NewsApplication'
+    isRegisterCompoAuto = false
+}
