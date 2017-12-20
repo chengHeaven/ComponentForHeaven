@@ -33,13 +33,17 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 
 public class BezierDot extends View implements ViewPager.OnPageChangeListener {
+
+    private CompositeDisposable mDisposable;
+
     public BezierDot(Context context) {
         this(context, null);
     }
@@ -52,7 +56,7 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
         super(context, attrs, defStyleAttr);
 
         mRadius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 15, getResources().getDisplayMetrics());  //默认设置15dp
-
+        mDisposable = new CompositeDisposable();
         // 获得我们所定义的自定义样式属性
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BezierDot, defStyleAttr, 0);
         color_bez = array.getColor(R.styleable.BezierDot_color_bez, color_bez);
@@ -529,6 +533,9 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageSelected(int position) {
+        Log.e("onPageSelected: ", position + "");
+        Glide.clear(mBackground);
+        Glide.with(getContext()).load(mImageList.get(position)).into(mBackground);
     }
 
     @Override
@@ -587,7 +594,8 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
         return interval;
     }
 
-    private Disposable mDisposable;
+    //    private Disposable mDisposable;
+    private Disposable disposable;
     int currentItem = 0;
     private int mDelay = 2000;
 
@@ -596,24 +604,17 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
     }
 
     public void start() {
-        Observable.interval(mDelay, mDelay, TimeUnit.MILLISECONDS).subscribe(new Observer<Long>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                mDisposable = d;
-            }
 
+        DisposableObserver<Long> disposableObserver = new DisposableObserver<Long>() {
             @Override
-            public void onNext(Long value) {
+            public void onNext(Long aLong) {
                 if (currentItem <= mViewPage.getAdapter().getCount() - 2) {
                     currentItem++;
                     Observable.just(1)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(integer -> {
-                                Log.e("current === ", currentItem + "");
-                                Glide.clear(mBackground);
                                 mViewPage.setCurrentItem(currentItem);
-                                Glide.with(getContext()).load(mImageList.get(currentItem)).into(mBackground);
                             });
                 } else {
                     currentItem = 0;
@@ -622,13 +623,10 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(integer -> {
-                                Glide.clear(mBackground);
                                 mViewPage.setCurrentItem(0);
-                                Glide.with(getContext()).load(mImageList.get(currentItem)).into(mBackground);
                             });
                 }
             }
-
 
             @Override
             public void onError(Throwable e) {
@@ -639,13 +637,20 @@ public class BezierDot extends View implements ViewPager.OnPageChangeListener {
             public void onComplete() {
 
             }
-        });
+        };
+        Observable.interval(mDelay, mDelay, TimeUnit.MILLISECONDS).subscribe(disposableObserver);
+        mDisposable.add(disposableObserver);
     }
 
     public void stop() {
-        if (mDisposable != null) {
-            mDisposable.dispose();
-        }
+        mDisposable.clear();
+    }
+
+    public void destroy() {
         mDisposable = null;
+    }
+
+    public void resume() {
+        start();
     }
 }

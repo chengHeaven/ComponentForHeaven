@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //    @BindView(R.id.delete_movie)
     Button delete;
 
+    NewsService service;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +53,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (router.getService(NewsService.class.getSimpleName()) != null) {
-            NewsService service = (NewsService) router.getService(NewsService.class.getSimpleName());
+            service = (NewsService) router.getService(NewsService.class.getSimpleName());
             fragment = service.getNewsFragment();
             ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.main_content, fragment).commitAllowingStateLoss();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (service != null) {
+            service.resume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (service != null) {
+            service.pause();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (service != null) {
+            service.destroy();
         }
     }
 

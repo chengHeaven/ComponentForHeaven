@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.github.chengheaven.componentservice.customer.bezierBanner.BezierDot;
 import com.github.chengheaven.componentservice.customer.bezierBanner.BezierViewPager;
 import com.github.chengheaven.componentservice.customer.bezierBanner.CardPagerAdapter;
-import com.github.chengheaven.componentservice.utils.Utils;
 import com.github.chengheaven.componentservice.view.BaseFragment;
 import com.github.chengheaven.componentservice.view.BasePresenter;
 import com.github.chengheaven.news.R;
@@ -29,7 +27,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
 
     ImageView mBackground;
     BezierViewPager mViewpager;
-    BezierDot mDot;
+    static BezierDot mDot;
     private List<Object> imageList;
 
     private NewsContract.Presenter mPresenter;
@@ -56,11 +54,15 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         cardPagerAdapter.addUrl(imageList);
         cardPagerAdapter.setOnCardItemClickListener((v, position) -> Snackbar.make(v, "click" + position, Snackbar.LENGTH_SHORT).show());
 
-        mViewpager.setWidth(getActivity().getWindowManager().getDefaultDisplay().getWidth());
-        mViewpager.setInterval(8);
-        mViewpager.setClipToPadding(false);
-        mViewpager.setAdapter(cardPagerAdapter);
-        mViewpager.showTransformer(0.2f);
+        mViewpager.setHeightRatio(0.565f)
+                .setInterval(8)
+                .setWidth(getActivity().getWindowManager().getDefaultDisplay().getWidth())
+                .setHeightRatio(0.565f)
+                .setMaxFactor(50)
+                .setTransformer(0.2f)
+                .setBackground(mBackground)
+                .setClipPadding(false)
+                .setAdapter(cardPagerAdapter);
 
         mDot.setInterval(5);
         mDot.setRadius(20);
@@ -68,8 +70,8 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         mDot.attachToViewPager(mViewpager, mBackground, imageList);
         mDot.start();
 
-        mBackground.setLayoutParams(new RelativeLayout.LayoutParams(mViewpager.getLayoutParams().width,
-                mViewpager.getLayoutParams().height + Utils.dp2px(getContext(), 30)));
+//        mBackground.setLayoutParams(new RelativeLayout.LayoutParams(mViewpager.getLayoutParams().width,
+//                mViewpager.getLayoutParams().height + Utils.dp2px(getContext(), 30)));
 
         return view;
     }
@@ -95,5 +97,30 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     @Override
     public void setPresenter(BasePresenter presenter) {
         mPresenter = (NewsContract.Presenter) presenter;
+    }
+
+    public static void resume() {
+        if (mDot != null) {
+            mDot.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDot != null) {
+            mDot.stop();
+        }
+    }
+
+    public static void pause() {
+        if (mDot != null) {
+            mDot.stop();
+        }
+    }
+
+    public static void destroy() {
+        mDot.stop();
+        mDot.destroy();
     }
 }

@@ -15,4 +15,19 @@ public class NewsServiceImpl implements NewsService {
     public Fragment getNewsFragment() {
         return NewsFragment.newInstance();
     }
+
+    @Override
+    public void resume() {
+        NewsFragment.resume();
+    }
+
+    @Override
+    public void pause() {
+        NewsFragment.pause();
+    }
+
+    @Override
+    public void destroy() {
+        NewsFragment.destroy();
+    }
 }

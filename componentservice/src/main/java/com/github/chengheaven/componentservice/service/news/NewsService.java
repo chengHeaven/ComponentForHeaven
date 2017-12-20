@@ -9,4 +9,10 @@ import android.support.v4.app.Fragment;
 public interface NewsService {
 
     Fragment getNewsFragment();
+
+    void resume();
+
+    void pause();
+
+    void destroy();
 }

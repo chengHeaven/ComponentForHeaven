@@ -14,14 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.github.chengheaven.componentservice.customer.AppBarStateChangeListener;
 import com.github.chengheaven.componentservice.customer.bezierBanner.BezierDot;
 import com.github.chengheaven.componentservice.customer.bezierBanner.BezierViewPager;
 import com.github.chengheaven.componentservice.customer.bezierBanner.CardPagerAdapter;
 import com.github.chengheaven.componentservice.customer.statusbar.StatusBarUtil;
-import com.github.chengheaven.componentservice.utils.Utils;
 import com.github.chengheaven.componentservice.view.BaseFragment;
 import com.github.chengheaven.componentservice.view.BasePresenter;
 import com.github.chengheaven.news.R;
@@ -93,11 +91,16 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         cardPagerAdapter.setOnCardItemClickListener((v, position) ->
                 Snackbar.make(v, "click" + position, Snackbar.LENGTH_SHORT).show());
 
-        mViewpager.setWidth(getActivity().getWindowManager().getDefaultDisplay().getWidth());
-        mViewpager.setInterval(8);
-        mViewpager.setClipToPadding(false);
-        mViewpager.setAdapter(cardPagerAdapter);
-        mViewpager.showTransformer(0.2f);
+
+        mViewpager.setHeightRatio(0.565f)
+                .setInterval(8)
+                .setWidth(getActivity().getWindowManager().getDefaultDisplay().getWidth())
+                .setHeightRatio(0.565f)
+                .setMaxFactor(50)
+                .setTransformer(0.2f)
+                .setBackground(mBackground)
+                .setClipPadding(false)
+                .setAdapter(cardPagerAdapter);
 
 //        ViewPagerScroller scroller = new ViewPagerScroller(getContext());
 //        scroller.setScrollDuration(1500);
@@ -108,10 +111,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         mDot.setDelay(2000);
         mDot.attachToViewPager(mViewpager, mBackground, imageList);
         mDot.start();
-
-        mBackground.setLayoutParams(new RelativeLayout.LayoutParams(mViewpager.getLayoutParams().width,
-                mViewpager.getLayoutParams().height + Utils.dp2px(getContext(), 30)));
-
 
         List<Fragment> fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
@@ -133,6 +132,18 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
 //        mTab.addOnTabSelectedListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        mDot.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        mDot.pause();
     }
 
     public void initImageList() {
@@ -164,7 +175,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         private List<Fragment> mFragments;
         private List<String> mTitles;
 
-        public ViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
+        ViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
             super(fm);
             mFragments = fragments;
             mTitles = titles;

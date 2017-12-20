@@ -1,10 +1,13 @@
 package com.github.chengheaven.componentservice.http;
 
+import com.github.chengheaven.componentservice.application.BaseApplication;
 import com.github.chengheaven.componentservice.customer.WebViewCookie;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -36,6 +39,8 @@ public class RetrofitFactory {
     private static OkHttpClient getOkHttpClient() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        Cache cache = new Cache(new File(BaseApplication.getContext().getCacheDir(), "httpCache"),
+                1024 * 1024 * 100);
 
         return new OkHttpClient().newBuilder()
                 .addInterceptor(logging)
@@ -43,6 +48,7 @@ public class RetrofitFactory {
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .cookieJar(new WebViewCookie())
+                .cache(cache)
                 .build();
     }
 }

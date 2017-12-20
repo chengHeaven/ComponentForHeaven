@@ -1,11 +1,14 @@
 package com.github.chengheaven.componentservice.customer.bezierBanner;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.github.chengheaven.componentservice.utils.Utils;
 
 public class BezierViewPager extends ViewPager {
     private boolean touchable = true;
@@ -14,6 +17,10 @@ public class BezierViewPager extends ViewPager {
     private int mWidth = 0;
     private int mInterval = 8;
     private int mMaxFactor = 50;
+    private float mZoomIn = 0.2f;
+    private ImageView mBackground;
+    private PagerAdapter mAdapter;
+    private boolean mClipToPadding;
 
     public BezierViewPager(Context context) {
         super(context);
@@ -40,35 +47,60 @@ public class BezierViewPager extends ViewPager {
         return touchable && super.onTouchEvent(event);
     }
 
-    public void setHeightRatio(float heightRatio) {
-        this.mHeightRatio = heightRatio;
-        init();
+
+    public BezierViewPager setBackground(ImageView background) {
+        this.mBackground = background;
+        return this;
     }
 
-    // view 的 宽
-    public void setWidth(int width) {
+    public BezierViewPager setTransformer(float zoomIn) {
+        this.mZoomIn = zoomIn;
+        return this;
+    }
+
+    public BezierViewPager setHeightRatio(float percent) {
+        this.mHeightRatio = percent;
+        return this;
+    }
+
+    public BezierViewPager setWidth(int width) {
         this.mWidth = width;
-        init();
+        return this;
     }
 
-    // 图片间隔大小
-    public void setMaxElevationFactor(int px) {
-        this.mMaxFactor = px;
-        init();
+    public BezierViewPager setInterval(int interval) {
+        this.mInterval = interval;
+        return this;
     }
 
-    // 左右空隙是 View 的 几分之一
-    public void setInterval(int mInterval) {
-        this.mInterval = mInterval;
+    public BezierViewPager setMaxFactor(int factor) {
+        this.mMaxFactor = factor;
+        return this;
+    }
+
+    public BezierViewPager setClipPadding(boolean b) {
+        this.mClipToPadding = b;
+        return this;
+    }
+
+    public void setAdapter(CardPagerAdapter adapter) {
+        this.mAdapter = adapter;
         init();
     }
 
     private void init() {
         setLayoutParams(new RelativeLayout.LayoutParams(mWidth, (int) (mWidth * mHeightRatio)));
+        if (mBackground != null) {
+            mBackground.setLayoutParams(new RelativeLayout.LayoutParams(mWidth,
+                    (int) (mWidth * mHeightRatio) + Utils.dp2px(getContext(), 30)));
+        }
         int mWidthPadding = mWidth / mInterval;
         float heightMore = (1.5f * mMaxFactor + dp2px(3)) - (mMaxFactor + dp2px(3)) * mHeightRatio;
         int mHeightPadding = (int) (mWidthPadding * mHeightRatio - heightMore) / 2;
         setPadding(mWidthPadding, mHeightPadding, mWidthPadding, mHeightPadding / 2);
+        showTransformer(mZoomIn);
+        setAdapter(mAdapter);
+        setClipToPadding(mClipToPadding);
     }
 
     public int dp2px(float dpValue) {

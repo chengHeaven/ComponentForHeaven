@@ -28,7 +28,7 @@ public class NewsTestActivity extends AppCompatActivity {
             newsFragment = NewsFragment.newInstance();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.tab_content, newsFragment);
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
         }
 
         DaggerNewsTestComponent.builder()

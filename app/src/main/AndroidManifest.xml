@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.github.chengheaven.componentforheaven">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.github.chengheaven.componentforheaven.application.AppApplication"
         android:allowBackup="true"
