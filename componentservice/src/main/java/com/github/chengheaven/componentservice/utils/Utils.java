@@ -9,9 +9,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -94,42 +97,54 @@ public class Utils {
     }
 
     public static void showSnackBar(final View rootView, String text) {
-        final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
-        snackbar.show();
+        if (rootView != null) {
+            final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
     }
 
     public static void showSnackBar(final View rootView, String text, String action, View.OnClickListener listener) {
-        final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
-        snackbar.setAction(action, listener);
-        snackbar.show();
+        if (rootView != null) {
+            final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
+            snackbar.setAction(action, listener);
+            snackbar.show();
+        }
     }
 
     public static void showSnackBar(final View rootView, String text, String action, View.OnClickListener listener, Snackbar.Callback callback) {
-        final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
-        snackbar.setAction(action, listener);
-        snackbar.setCallback(callback);
-        snackbar.show();
+        if (rootView != null) {
+            final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
+            snackbar.setAction(action, listener);
+            snackbar.setCallback(callback);
+            snackbar.show();
+        }
     }
 
     public static void showSnackBar(final Activity activity, String text) {
-        View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-        final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
-        snackbar.show();
+        if (activity != null) {
+            View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+            final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
     }
 
     public static void showSnackBar(final Activity activity, String text, String action, View.OnClickListener listener) {
-        View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-        final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
-        snackbar.setAction(action, listener);
-        snackbar.show();
+        if (activity != null) {
+            View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+            final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
+            snackbar.setAction(action, listener);
+            snackbar.show();
+        }
     }
 
     public static void showSnackBar(final Activity activity, String text, String action, View.OnClickListener listener, Snackbar.Callback callback) {
-        View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-        final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
-        snackbar.setAction(action, listener);
-        snackbar.setCallback(callback);
-        snackbar.show();
+        if (activity != null) {
+            View rootView = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+            final Snackbar snackbar = Snackbar.make(rootView, text, Snackbar.LENGTH_LONG);
+            snackbar.setAction(action, listener);
+            snackbar.setCallback(callback);
+            snackbar.show();
+        }
     }
 
     public static void i(String msg) {
@@ -559,8 +574,9 @@ public class Utils {
                 }
             }
             return dir_r;
-        } else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -1262,14 +1278,14 @@ public class Utils {
     /**
      * get a fixed-length random string, its a mixture of chars in source
      */
-    public static String getRandom(String source, int length) {
+    private static String getRandom(String source, int length) {
         return TextUtils.isEmpty(source) ? null : getRandom(source.toCharArray(), length);
     }
 
     /**
      * get a fixed-length random string, its a mixture of chars in sourceChar
      */
-    public static String getRandom(char[] sourceChar, int length) {
+    private static String getRandom(char[] sourceChar, int length) {
         if (sourceChar == null || sourceChar.length == 0 || length < 0) {
             return null;
         }
@@ -1287,9 +1303,9 @@ public class Utils {
      *
      * @param max
      * @return <ul>
-     *         <li>if max <= 0, return 0</li>
-     *         <li>else return random int between 0 and max</li>
-     *         </ul>
+     * <li>if max <= 0, return 0</li>
+     * <li>else return random int between 0 and max</li>
+     * </ul>
      */
     public static int getRandom(int max) {
         return getRandom(0, max);
@@ -1301,10 +1317,10 @@ public class Utils {
      * @param min
      * @param max
      * @return <ul>
-     *         <li>if min > max, return 0</li>
-     *         <li>if min == max, return min</li>
-     *         <li>else return random int between min and max</li>
-     *         </ul>
+     * <li>if min > max, return 0</li>
+     * <li>if min == max, return min</li>
+     * <li>else return random int between min and max</li>
+     * </ul>
      */
     public static int getRandom(int min, int max) {
         if (min > max) {
@@ -1333,5 +1349,26 @@ public class Utils {
         map.put("model", phoneMode);
         map.put("sdk", phoneSDk);
         return map;
+    }
+
+    /**
+     * bitmap to Byte[]
+     */
+    private byte[] bitmapToBytes(Bitmap bm) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, bos);
+        return bos.toByteArray();
+    }
+
+    /**
+     * drawable to bitmap
+     */
+    private Bitmap drawableToBitmap(Drawable drawable) {
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
+                drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 }

@@ -20,4 +20,24 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public void toastMessage(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void hideError() {
+
+    }
 }

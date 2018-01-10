@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ComponentForHeaven</string>
+    <string name="lv_10">Lv.10</string>
+    <string name="app_main">项目主页</string>
+    <string name="sweep_download">扫码下载</string>
+    <string name="feedback">问题反馈</string>
+    <string name="about">关于云阅</string>
 </resources>

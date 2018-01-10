@@ -10,4 +10,12 @@ public interface BaseView<T extends BasePresenter> {
     void updateLoadingProgress(int progress);
 
     void toastMessage(String msg);
+
+    void showLoading();
+
+    void hideLoading();
+
+    void showError();
+
+    void hideError();
 }

@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Router.unregisterComponent("com.github.chengheaven.news.app.NewsApp");
                 break;
 
+            default:
+                break;
         }
     }
 }

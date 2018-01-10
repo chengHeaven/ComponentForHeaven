@@ -18,18 +18,13 @@ public class AppApplication extends Application {
         super.onCreate();
         sInstance = this;
         //如果isRegisterCompoAuto为false，则需要通过反射加载组件
-        Router.registerComponent(getApplicationContext(),
-                "com.github.chengheaven.news.app.NewsApp");
+//        Router.registerComponent(getApplicationContext(),
+//                "com.github.chengheaven.news.app.NewsApp");
 
-//        mDataRepositoryComponent = DaggerDataRepositoryComponent
-//                .builder()
-//                .applicationModule(new ApplicationModule(getBaseContext()))
-//                .build();
+        Router.registerComponent(getApplicationContext(),
+                "com.github.chengheaven.technology.app.TechnologyApp");
     }
 
-//    public DataRepositoryComponent getDataRepositoryComponent() {
-//        return mDataRepositoryComponent;
-//    }
 
     public Application getInstance() {
         return sInstance;

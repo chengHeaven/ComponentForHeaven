@@ -1,0 +1,30 @@
+<resources>
+    <string name="code_app_name">code</string>
+    <string name="code_copy_url">复制链接</string>
+    <string name="code_open_url">打开链接</string>
+    <string name="code_network_connectionless">No address associated with hostname</string>
+    <string name="code_network_connectionless_chinese">网络无连接</string>
+    <string name="code_result_empty">results is empty</string>
+    <string name="code_welfare">Welfare</string>
+    <string name="code_android">Android</string>
+    <string name="code_ios">IOS</string>
+    <string name="code_app">App</string>
+    <string name="code_all_chinese">全部</string>
+    <string name="code_all">all</string>
+    <string name="code_iOS">iOS</string>
+    <string name="code_front">前端</string>
+    <string name="code_recommend">瞎推荐</string>
+    <string name="code_video">休息视频</string>
+    <string name="code_expand">拓展资源</string>
+    <string name="code_welfare_chinese">福利</string>
+    <string name="code_refresh">refresh</string>
+    <string name="code_director">导演：</string>
+    <string name="code_performer">主演：</string>
+    <string name="code_more_info">更多信息</string>
+    <string name="code_issues">Issues</string>
+    <string name="code_change_item">调整栏目顺序</string>
+    <string name="code_request_data_failure">获取数据失败</string>
+    <string name="code_save">保存</string>
+    <string name="code_spot" >&#160;·&#160;</string>
+    <string name="code_loading">努力加载中&#8230;</string>
+</resources>
