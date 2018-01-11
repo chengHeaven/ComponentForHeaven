@@ -1,8 +1,8 @@
 package com.github.chengheaven.technology.presenter.technology;
 
-import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.componentservice.view.BasePresenter;
 import com.github.chengheaven.componentservice.view.BaseView;
+import com.github.chengheaven.technology.bean.GankData;
 
 import java.util.List;
 
@@ -33,6 +33,11 @@ public interface CustomerContract {
          * @param type Android / iOS / 全部 / 前端 / 瞎推荐 / 休息视频 / 拓展资源 / App
          */
         void setType(String type);
+
+        /**
+         * every fragment intent to this
+         */
+        void isIntent();
     }
 
     interface Presenter extends BasePresenter {

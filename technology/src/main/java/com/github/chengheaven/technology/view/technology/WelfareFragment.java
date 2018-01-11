@@ -66,7 +66,11 @@ public class WelfareFragment extends BaseFragment implements WelfareContract.Vie
         mWelfareRecycler.setAdapter(mAdapter);
 
         page = 1;
-        mPresenter.getWelfare(view, getString(R.string.code_welfare_chinese), page, 20);
+        if (mPresenter.getWelfareImageFromLocal() != null && mPresenter.getWelfareImageFromLocal().size() != 0) {
+            mAdapter.update(mPresenter.getWelfareImageFromLocal());
+        } else {
+            mPresenter.getWelfare(view, getString(R.string.code_welfare_chinese), page, 20);
+        }
         mWelfareRecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -136,6 +140,12 @@ public class WelfareFragment extends BaseFragment implements WelfareContract.Vie
                 mUrls.addAll(list);
                 notifyDataSetChanged();
             }
+        }
+
+        void update(List<String> list) {
+            mUrls.clear();
+            mUrls = list;
+            notifyDataSetChanged();
         }
 
         void clear() {

@@ -1,7 +1,6 @@
 package com.github.chengheaven.technology.data.technology;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.github.chengheaven.technology.R;
 import com.github.chengheaven.technology.bean.FrontpageBean;
@@ -44,6 +43,8 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
     private List<String> mUrls = new ArrayList<>();
     private List<List<HomeBean>> mHomeList = new ArrayList<>();
     private List<String> mWelfareUrls = new ArrayList<>();
+    private List<GankData.ResultsBean> mCustomizationList = new ArrayList<>();
+    private List<GankData.ResultsBean> mAndroidList = new ArrayList<>();
 
     public TechnologyDataSourceImpl(Context context) {
         mContext = context;
@@ -88,8 +89,6 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
                 t.printStackTrace();
             }
         });
-
-
     }
 
     @Override
@@ -213,7 +212,6 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
                     }
                     if (retryCount[0] > 0) {
                         retryCount[0]--;
-                        Log.d("TechnologyDataSourceImpl", retryCount[0] + "");
                         return Observable.timer(2000, TimeUnit.MILLISECONDS);
                     }
                     return Observable.error((Throwable) throwable);
@@ -238,7 +236,6 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
                     @Override
                     public void onError(Throwable e) {
                         callback.onFailed(e.getMessage());
-                        Log.d("TechnologyDataSourceImpl", e.getMessage());
                     }
 
                 });
@@ -270,6 +267,34 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
     @Override
     public List<String> getWelfareImageFromLocal() {
         return mWelfareUrls;
+    }
+
+    @Override
+    public void setCustomizationToLocal(List<GankData.ResultsBean> list, boolean add) {
+        if (add) {
+            this.mCustomizationList.addAll(list);
+        } else {
+            this.mCustomizationList = list;
+        }
+    }
+
+    @Override
+    public List<GankData.ResultsBean> getCustomizationFromLocal() {
+        return mCustomizationList;
+    }
+
+    @Override
+    public void setAndroidToLocal(List<GankData.ResultsBean> list, boolean add) {
+        if (add) {
+            this.mAndroidList.addAll(list);
+        } else {
+            this.mAndroidList = list;
+        }
+    }
+
+    @Override
+    public List<GankData.ResultsBean> getAndroidFromLocal() {
+        return mAndroidList;
     }
 
     @Override

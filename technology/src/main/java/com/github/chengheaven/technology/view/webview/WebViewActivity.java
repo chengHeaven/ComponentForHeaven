@@ -125,7 +125,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     private void getIntentData() {
         if (getIntent() != null) {
             mTitle = getIntent().getStringExtra("title");
-            mUrl = getIntent().getStringExtra("utl");
+            mUrl = getIntent().getStringExtra("url");
         }
     }
 

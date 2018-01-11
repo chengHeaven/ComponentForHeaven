@@ -1,5 +1,6 @@
 package com.github.chengheaven.technology.data.technology;
 
+import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.technology.bean.HomeBean;
 
 import java.util.List;
@@ -98,6 +99,36 @@ public interface TechnologyDataSource {
      * @return welfare image list
      */
     List<String> getWelfareImageFromLocal();
+
+    /**
+     * Set Customization list to memory
+     *
+     * @param list Customization list
+     * @param add  refresh or load more
+     */
+    void setCustomizationToLocal(List<GankData.ResultsBean> list, boolean add);
+
+    /**
+     * Get Customization list from memory
+     *
+     * @return Customization list
+     */
+    List<GankData.ResultsBean> getCustomizationFromLocal();
+
+    /**
+     * Set Android list to memory
+     *
+     * @param list Android list
+     * @param add  refresh or load more
+     */
+    void setAndroidToLocal(List<GankData.ResultsBean> list, boolean add);
+
+    /**
+     * Get Android list from memory
+     *
+     * @return Android list
+     */
+    List<GankData.ResultsBean> getAndroidFromLocal();
 
     /**
      * Clear the date in memory

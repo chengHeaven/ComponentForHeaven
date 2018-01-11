@@ -1,5 +1,6 @@
 package com.github.chengheaven.technology.data;
 
+import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.technology.bean.HomeBean;
 import com.github.chengheaven.technology.data.technology.TechnologyDataSource;
 
@@ -52,6 +53,26 @@ public class DataRepository implements TechnologyDataSource {
     @Override
     public List<String> getWelfareImageFromLocal() {
         return mTechnologyDataSource.getWelfareImageFromLocal();
+    }
+
+    @Override
+    public void setCustomizationToLocal(List<GankData.ResultsBean> list, boolean add) {
+        mTechnologyDataSource.setCustomizationToLocal(list, add);
+    }
+
+    @Override
+    public List<GankData.ResultsBean> getCustomizationFromLocal() {
+        return mTechnologyDataSource.getCustomizationFromLocal();
+    }
+
+    @Override
+    public void setAndroidToLocal(List<GankData.ResultsBean> list, boolean add) {
+        mTechnologyDataSource.setAndroidToLocal(list, add);
+    }
+
+    @Override
+    public List<GankData.ResultsBean> getAndroidFromLocal() {
+        return mTechnologyDataSource.getAndroidFromLocal();
     }
 
     @Override

@@ -30,5 +30,12 @@ public interface WelfareContract {
          * @param per  number of request data
          */
         void getWelfare(android.view.View view, String id, int page, int per);
+
+        /**
+         * Get welfare image url from local
+         *
+         * @return welfare image url
+         */
+        List<String> getWelfareImageFromLocal();
     }
 }

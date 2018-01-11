@@ -10,9 +10,11 @@ public interface TechnologyContract {
 
     interface View extends BaseView {
 
+        void setCurrentItem(int position);
     }
 
     interface Presenter extends BasePresenter {
 
+        void clear();
     }
 }

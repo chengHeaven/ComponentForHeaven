@@ -91,4 +91,9 @@ public class WelfarePresenter implements WelfareContract.Presenter {
             }
         });
     }
+
+    @Override
+    public List<String> getWelfareImageFromLocal() {
+        return mDataRepository.getWelfareImageFromLocal();
+    }
 }

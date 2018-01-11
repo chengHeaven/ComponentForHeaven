@@ -18,12 +18,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.chengheaven.componentservice.utils.GlideImageLoader;
+import com.github.chengheaven.componentservice.utils.RxBus;
 import com.github.chengheaven.componentservice.utils.SharedPreferenceUtil;
 import com.github.chengheaven.componentservice.utils.TimeUtil;
 import com.github.chengheaven.componentservice.view.BaseFragment;
 import com.github.chengheaven.componentservice.view.BasePresenter;
 import com.github.chengheaven.technology.R;
 import com.github.chengheaven.technology.bean.HomeBean;
+import com.github.chengheaven.technology.bean.rx.RxCustomer;
+import com.github.chengheaven.technology.bean.rx.RxDaily;
+import com.github.chengheaven.technology.bean.rx.RxPosition;
 import com.github.chengheaven.technology.constants.Constants;
 import com.github.chengheaven.technology.presenter.technology.EveryContract;
 import com.github.chengheaven.technology.view.webview.WebViewActivity;
@@ -31,6 +35,7 @@ import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -91,29 +96,6 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
                 last = TimeUtil.getLastTime(s[0], s[1], s[2]);
                 mPresenter.getRecycler(last.get(0), last.get(1), last.get(2));
             }
-//            mAnimation.setAnimationListener(new Animation.AnimationListener() {
-//                @Override
-//                public void onAnimationStart(Animation animation) {
-//                    mPresenter.getBannerUrl();
-//                    if (TimeUtil.isRightTime()) {
-//                        mPresenter.getRecycler(s[0], s[1], s[2]);
-//                        last = Arrays.asList(s);
-//                    } else {
-//                        last = TimeUtil.getLastTime(s[0], s[1], s[2]);
-//                        mPresenter.getRecycler(last.get(0), last.get(1), last.get(2));
-//                    }
-//                }
-//
-//                @Override
-//                public void onAnimationEnd(Animation animation) {
-////                    hideAnimation();
-//                }
-//
-//                @Override
-//                public void onAnimationRepeat(Animation animation) {
-//
-//                }
-//            });
         } else {
             mPresenter.getRecyclerAndBannerFromLocal();
         }
@@ -129,6 +111,11 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
     @Override
     public void onResume() {
         super.onResume();
+        if (mAdapter != null) {
+            List<String> list = new ArrayList<>();
+            Collections.addAll(list, SharedPreferenceUtil.getInstance(getContext()).getItemPosition().split(" "));
+            mAdapter.update(list);
+        }
     }
 
     @Override
@@ -247,32 +234,37 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
         class HeaderViewHolder extends RecyclerView.ViewHolder {
             Banner mBanner;
+            ImageView mXian;
+            ImageView mDaily;
+            ImageView mMovieHot;
 
             HeaderViewHolder(View itemView) {
                 super(itemView);
                 mBanner = itemView.findViewById(R.id.code_home_every_banner);
-                itemView.setOnClickListener(v -> {
-                    int i = v.getId();
-                    if (i == R.id.code_home_every_xd) {
-                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                        intent.putExtra("url", "https://gank.io/xiandu");
-                        intent.putExtra("title", getActivity().getResources().getString(R.string.loading));
-                        getActivity().startActivity(intent);
+                mXian = itemView.findViewById(R.id.code_home_every_xd);
+                mDaily = itemView.findViewById(R.id.code_home_daily_btn);
+                mMovieHot = itemView.findViewById(R.id.code_home_every_hot);
 
-                    } else if (i == R.id.code_home_daily_btn) {
-//                        RxPosition msgPosition = new RxPosition();
-//                        msgPosition.setPosition(2);
-//                        RxBus.getDefault().post(msgPosition);
-//                        RxCustomer msg = new RxCustomer();
-//                        msg.setType(getString(R.string.all));
-//                        RxBus.getDefault().post(msg);
+                mXian.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                    intent.putExtra("url", "https://gank.io/xiandu");
+                    intent.putExtra("title", getActivity().getResources().getString(R.string.loading));
+                    getActivity().startActivity(intent);
+                });
 
-                    } else if (i == R.id.code_home_every_hot) {
-//                        RxDaily rxDaily = new RxDaily();
-//                        rxDaily.setPosition(1);
-//                        RxBus.getDefault().post(rxDaily);
+                mDaily.setOnClickListener(v -> {
+                    RxCustomer msg = new RxCustomer();
+                    msg.setType(getString(R.string.code_all));
+                    RxBus.getDefault().post(msg);
+                    RxPosition msgPosition = new RxPosition();
+                    msgPosition.setPosition(2);
+                    RxBus.getDefault().post(msgPosition);
+                });
 
-                    }
+                mMovieHot.setOnClickListener(v -> {
+                    RxDaily rxDaily = new RxDaily();
+                    rxDaily.setPosition(1);
+                    RxBus.getDefault().post(rxDaily);
                 });
             }
         }
@@ -352,6 +344,31 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
             if (!isHave) {
                 holder.setVisibility(false);
             }
+
+            holder.mMore.setOnClickListener(v -> {
+                switch (holder.mTitleText.getText().toString()) {
+                    case "Android":
+                        RxPosition rxPosition = new RxPosition();
+                        rxPosition.setPosition(3);
+                        RxBus.getDefault().post(rxPosition);
+                        break;
+
+                    case "福利":
+                        RxPosition rxWelfare = new RxPosition();
+                        rxWelfare.setPosition(1);
+                        RxBus.getDefault().post(rxWelfare);
+                        break;
+
+                    default:
+                        RxPosition msgPosition = new RxPosition();
+                        msgPosition.setPosition(2);
+                        RxBus.getDefault().post(msgPosition);
+                        RxCustomer msg = new RxCustomer();
+                        msg.setType(holder.mTitleText.getText().toString());
+                        RxBus.getDefault().post(msg);
+                        break;
+                }
+            });
         }
 
         @Override
@@ -421,11 +438,9 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
             } else {
 
                 Glide.with(getActivity())
-//                        .load(mList.get(position).getUrl())
                         .load(mList.get(position).getImage())
                         .placeholder(R.drawable.img_two_bi_one)
                         .crossFade(1500)
-//                        .centerCrop()
                         .error(R.drawable.img_two_bi_one)
                         .into(holder.mImage);
             }

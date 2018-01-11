@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +15,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.github.chengheaven.componentservice.customer.XRecyclerView.XRecyclerView;
+import com.github.chengheaven.componentservice.view.BaseFragment;
+import com.github.chengheaven.componentservice.view.BasePresenter;
 import com.github.chengheaven.technology.R;
 import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.technology.presenter.technology.AndroidContract;
 import com.github.chengheaven.technology.view.webview.WebViewActivity;
-import com.github.chengheaven.componentservice.customer.XRecyclerView.XRecyclerView;
-import com.github.chengheaven.componentservice.view.BaseFragment;
-import com.github.chengheaven.componentservice.view.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +70,12 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
         mAdapter = new AndroidAdapter();
         mAndroidRecycler.setAdapter(mAdapter);
 
-        mPresenter.getAndroidData(view, null, getString(R.string.code_android), page, per);
+        if (mPresenter.getAndroidDataFromLocal() != null && mPresenter.getAndroidDataFromLocal().size() != 0) {
+            hideLoading();
+            mAdapter.refresh(mPresenter.getAndroidDataFromLocal());
+        } else {
+            mPresenter.getAndroidData(view, null, getString(R.string.code_android), page, per);
+        }
 
         mAndroidRecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -94,6 +98,15 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
         });
 
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser && mPresenter.getAndroidDataFromLocal() != null
+//                && mPresenter.getAndroidDataFromLocal().size() != 0) {
+//            mAdapter.refresh(mPresenter.getAndroidDataFromLocal());
+//        }
     }
 
     @Override
@@ -145,10 +158,8 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
         }
 
         void refresh(List<GankData.ResultsBean> list) {
-            Log.e("AndroidAdapter", "mList.hashCode():" + mList.hashCode());
             mList.clear();
             mList = list;
-            Log.e("AndroidAdapter", "mList.hashCode():" + mList.hashCode());
             notifyDataSetChanged();
         }
 

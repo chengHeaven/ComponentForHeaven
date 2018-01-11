@@ -27,6 +27,11 @@ import com.github.chengheaven.technology.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author Heaven_Cheng Created on 2017/12/25.
@@ -48,6 +53,7 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
     private CustomizationAdapter mAdapter;
 
     private CustomerContract.Presenter mPresenter;
+    private boolean mFlag = false;
 
     @Override
     public void setPresenter(BasePresenter presenter) {
@@ -78,6 +84,7 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
         mAdapter = new CustomizationAdapter();
         mCustomizationRecycler.setAdapter(mAdapter);
 
+        mPresenter.start();
         mPresenter.getCustomizationData(view, null, type, page, per);
 
         mCustomizationRecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -100,6 +107,19 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
         });
 
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mFlag) {
+            mFlag = false;
+            showLoading();
+            Observable.timer(3000, TimeUnit.MILLISECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(v -> hideLoading());
+        }
     }
 
     @Override
@@ -146,11 +166,20 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
     public void setType(String t) {
         type = t;
         mAdapter.clear();
-        mHeaderView.mTypeText.setText(t);
+        if (t.equals(getString(R.string.code_all))) {
+            mHeaderView.mTypeText.setText(getString(R.string.code_all_chinese));
+        } else {
+            mHeaderView.mTypeText.setText(t);
+        }
         if (t.equals(getString(R.string.code_ios))) {
             type = getString(R.string.code_iOS);
         }
         mPresenter.getCustomizationData(getView(), null, type, page, per);
+    }
+
+    @Override
+    public void isIntent() {
+        this.mFlag = true;
     }
 
     @Override

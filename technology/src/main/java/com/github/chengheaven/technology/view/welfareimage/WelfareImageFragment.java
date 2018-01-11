@@ -35,11 +35,11 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.github.chengheaven.technology.R;
-import com.github.chengheaven.technology.presenter.welfareimage.WelfareImageContract;
 import com.github.chengheaven.componentservice.utils.Utils;
 import com.github.chengheaven.componentservice.view.BaseFragment;
 import com.github.chengheaven.componentservice.view.BasePresenter;
+import com.github.chengheaven.technology.R;
+import com.github.chengheaven.technology.presenter.welfareimage.WelfareImageContract;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -233,7 +233,6 @@ public class WelfareImageFragment extends BaseFragment implements WelfareImageCo
         private ImageView mImage;
         private List<String> mUrls;
         private Activity mContext;
-        private List<View> mViews = new ArrayList<>();
 
         WelfareViewPagerAdapter(Activity mContext, List<String> mUrls) {
             this.mContext = mContext;

@@ -1,8 +1,8 @@
 package com.github.chengheaven.technology.presenter.technology;
 
-import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.componentservice.view.BasePresenter;
 import com.github.chengheaven.componentservice.view.BaseView;
+import com.github.chengheaven.technology.bean.GankData;
 
 import java.util.List;
 
@@ -41,5 +41,12 @@ public interface AndroidContract {
          * @param per  number of request data
          */
         void getAndroidData(android.view.View view, String type, String id, int page, int per);
+
+        /**
+         * Get android data from local
+         *
+         * @return android data
+         */
+        List<GankData.ResultsBean> getAndroidDataFromLocal();
     }
 }

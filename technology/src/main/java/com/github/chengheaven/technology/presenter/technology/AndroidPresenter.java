@@ -3,12 +3,12 @@ package com.github.chengheaven.technology.presenter.technology;
 import android.util.Log;
 import android.view.View;
 
+import com.github.chengheaven.componentservice.utils.Utils;
 import com.github.chengheaven.technology.R;
 import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.technology.data.DataRepository;
 import com.github.chengheaven.technology.data.technology.TechnologyDataSource;
 import com.github.chengheaven.technology.util.ResourceUtil;
-import com.github.chengheaven.componentservice.utils.Utils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -49,14 +49,15 @@ public class AndroidPresenter implements AndroidContract.Presenter {
         mDataRepository.getGankData(id, page, per, new TechnologyDataSource.EveryCallback<GankData.ResultsBean>() {
             @Override
             public void onSuccess(List<GankData.ResultsBean> results) {
-                mView.hideLoading();
                 Observable.just(results)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(data -> {
                             if (type == null) {
+                                mDataRepository.setAndroidToLocal(data, false);
                                 mView.refreshList(data);
                             } else {
+                                mDataRepository.setAndroidToLocal(data, true);
                                 mView.updateList(data);
                             }
                             Observable.timer(3000, TimeUnit.MILLISECONDS)
@@ -76,7 +77,7 @@ public class AndroidPresenter implements AndroidContract.Presenter {
                                 Utils.showSnackBar(view, ResourceUtil.getString(R.string.code_network_connectionless_chinese));
                             }
                             mView.hideLoading();
-                            if (page==1) {
+                            if (page == 1) {
                                 mView.showError();
                             }
                             mView.updateList(null);
@@ -85,5 +86,10 @@ public class AndroidPresenter implements AndroidContract.Presenter {
                         });
             }
         });
+    }
+
+    @Override
+    public List<GankData.ResultsBean> getAndroidDataFromLocal() {
+        return mDataRepository.getAndroidFromLocal();
     }
 }
