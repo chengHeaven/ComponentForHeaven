@@ -67,10 +67,10 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.code_customer_fragment, container, false);
+        View view = inflater.inflate(R.layout.technology_customer_fragment, container, false);
 
         mCustomizationRecycler = view.findViewById(R.id.customization_recycler);
-        mHeader = View.inflate(getContext(), R.layout.code_header_customization, null);
+        mHeader = View.inflate(getContext(), R.layout.technology_header_customization, null);
 
         mLoadingImage = view.findViewById(R.id.image_loading);
         mLoadingBar = view.findViewById(R.id.ll_loading_bar);
@@ -96,14 +96,14 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
             @Override
             public void onLoadMore() {
                 page++;
-                mPresenter.getCustomizationData(view, getString(R.string.code_refresh), type, page, per);
+                mPresenter.getCustomizationData(view, getString(R.string.technology_refresh), type, page, per);
             }
         });
 
         mErrorBar.setOnClickListener(v -> {
             hideError();
             showLoading();
-            mPresenter.getCustomizationData(view, null, getString(R.string.code_android), page, 20);
+            mPresenter.getCustomizationData(view, null, getString(R.string.technology_android), page, 20);
         });
 
         return view;
@@ -166,13 +166,13 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
     public void setType(String t) {
         type = t;
         mAdapter.clear();
-        if (t.equals(getString(R.string.code_all))) {
-            mHeaderView.mTypeText.setText(getString(R.string.code_all_chinese));
+        if (t.equals(getString(R.string.technology_all))) {
+            mHeaderView.mTypeText.setText(getString(R.string.technology_all_chinese));
         } else {
             mHeaderView.mTypeText.setText(t);
         }
-        if (t.equals(getString(R.string.code_ios))) {
-            type = getString(R.string.code_iOS);
+        if (t.equals(getString(R.string.technology_ios))) {
+            type = getString(R.string.technology_iOS);
         }
         mPresenter.getCustomizationData(getView(), null, type, page, per);
     }
@@ -197,49 +197,49 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
             mChooseBtn = header.findViewById(R.id.ll_choose_catalogue);
             mTypeText = header.findViewById(R.id.customization_header_type_text);
 
-            mChooseBtn.setOnClickListener(v -> new BottomSheet.Builder(getActivity(), R.style.Code_BottomSheet_StyleDialog)
+            mChooseBtn.setOnClickListener(v -> new BottomSheet.Builder(getActivity(), R.style.Technology_BottomSheet_StyleDialog)
                     .title("选择分类")
-                    .sheet(R.menu.code_customization_menu)
+                    .sheet(R.menu.technology_customization_menu)
                     .listener((dialog, which) -> {
                         if (which == R.id.gank_all) {
-                            if (isOtherType(getString(R.string.code_all_chinese))) {
-                                mTypeText.setText(getString(R.string.code_all_chinese));
-                                type = getString(R.string.code_all);
+                            if (isOtherType(getString(R.string.technology_all_chinese))) {
+                                mTypeText.setText(getString(R.string.technology_all_chinese));
+                                type = getString(R.string.technology_all);
                             }
                         } else if (which == R.id.gank_android) {
-                            if (isOtherType(getString(R.string.code_android))) {
-                                mTypeText.setText(R.string.code_android);
-                                type = getString(R.string.code_android);
+                            if (isOtherType(getString(R.string.technology_android))) {
+                                mTypeText.setText(R.string.technology_android);
+                                type = getString(R.string.technology_android);
                             }
                         } else if (which == R.id.gank_ios) {
-                            if (isOtherType(getString(R.string.code_ios))) {
-                                mTypeText.setText(R.string.code_ios);
-                                type = getString(R.string.code_iOS);
+                            if (isOtherType(getString(R.string.technology_ios))) {
+                                mTypeText.setText(R.string.technology_ios);
+                                type = getString(R.string.technology_iOS);
                             }
                         } else if (which == R.id.gank_qian) {
-                            if (isOtherType(getString(R.string.code_front))) {
-                                mTypeText.setText(R.string.code_front);
-                                type = getString(R.string.code_front);
+                            if (isOtherType(getString(R.string.technology_front))) {
+                                mTypeText.setText(R.string.technology_front);
+                                type = getString(R.string.technology_front);
                             }
                         } else if (which == R.id.gank_xia) {
-                            if (isOtherType(getString(R.string.code_recommend))) {
-                                mTypeText.setText(R.string.code_recommend);
-                                type = getString(R.string.code_recommend);
+                            if (isOtherType(getString(R.string.technology_recommend))) {
+                                mTypeText.setText(R.string.technology_recommend);
+                                type = getString(R.string.technology_recommend);
                             }
                         } else if (which == R.id.gank_app) {
-                            if (isOtherType(getString(R.string.code_app))) {
-                                mTypeText.setText(R.string.code_app);
-                                type = getString(R.string.code_app);
+                            if (isOtherType(getString(R.string.technology_app))) {
+                                mTypeText.setText(R.string.technology_app);
+                                type = getString(R.string.technology_app);
                             }
                         } else if (which == R.id.gank_movie) {
-                            if (isOtherType(getString(R.string.code_video))) {
-                                mTypeText.setText(R.string.code_video);
-                                type = getString(R.string.code_video);
+                            if (isOtherType(getString(R.string.technology_video))) {
+                                mTypeText.setText(R.string.technology_video);
+                                type = getString(R.string.technology_video);
                             }
                         } else if (which == R.id.gank_resource) {
-                            if (isOtherType(getString(R.string.code_expand))) {
-                                mTypeText.setText(R.string.code_expand);
-                                type = getString(R.string.code_expand);
+                            if (isOtherType(getString(R.string.technology_expand))) {
+                                mTypeText.setText(R.string.technology_expand);
+                                type = getString(R.string.technology_expand);
                             }
                         }
                         page = 1;
@@ -285,13 +285,13 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_customer_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_customer_item, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            if (mList.get(position).getType().equals(getString(R.string.code_welfare_chinese))) {
+            if (mList.get(position).getType().equals(getString(R.string.technology_welfare_chinese))) {
                 holder.mWelfare.setVisibility(View.VISIBLE);
                 holder.mNormal.setVisibility(View.GONE);
                 Glide.with(getContext())
@@ -323,7 +323,7 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
                 holder.itemView.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
                     intent.putExtra("url", mList.get(position).getUrl());
-                    intent.putExtra("title", getString(R.string.code_loading));
+                    intent.putExtra("title", getString(R.string.technology_loading));
                     startActivity(intent);
                 });
             }

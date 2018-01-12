@@ -73,10 +73,10 @@ public class TechnologyFragment extends BaseFragment implements TechnologyContra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.code_frag, container, false);
+        View view = inflater.inflate(R.layout.technology_frag, container, false);
 
-        mTechnologyTab = view.findViewById(R.id.code_tab);
-        mTechnologyViewpager = view.findViewById(R.id.code_viewpager);
+        mTechnologyTab = view.findViewById(R.id.technology_tab);
+        mTechnologyViewpager = view.findViewById(R.id.technology_viewpager);
 
         List<Fragment> fragments = new ArrayList<>();
         EveryFragment everyFragment = EveryFragment.newInstance();

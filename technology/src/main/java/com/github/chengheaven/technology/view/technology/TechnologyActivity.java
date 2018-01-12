@@ -24,13 +24,13 @@ public class TechnologyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.code_act);
+        setContentView(R.layout.technology_act);
 
-        TechnologyFragment technologyFragment = (TechnologyFragment) getSupportFragmentManager().findFragmentById(R.id.code_content_frame);
+        TechnologyFragment technologyFragment = (TechnologyFragment) getSupportFragmentManager().findFragmentById(R.id.technology_content_frame);
         if (technologyFragment == null) {
             technologyFragment = TechnologyFragment.newInstance();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.code_content_frame, technologyFragment);
+            transaction.add(R.id.technology_content_frame, technologyFragment);
             transaction.commitAllowingStateLoss();
         }
 

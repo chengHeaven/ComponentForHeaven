@@ -63,8 +63,8 @@ public class EveryPresenter implements EveryContract.Presenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(i -> {
                             mView.stopAnimation();
-                            if (msg.contains(ResourceUtil.getString(R.string.code_network_connectionless))) {
-                                mView.toastMessage(ResourceUtil.getString(R.string.code_network_connectionless_chinese));
+                            if (msg.contains(ResourceUtil.getString(R.string.technology_network_connectionless))) {
+                                mView.toastMessage(ResourceUtil.getString(R.string.technology_network_connectionless_chinese));
                             } else {
                                 mView.toastMessage(msg);
                             }
@@ -96,11 +96,11 @@ public class EveryPresenter implements EveryContract.Presenter {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(i -> {
-                            if (ResourceUtil.getString(R.string.code_result_empty).equals(msg)) {
+                            if (ResourceUtil.getString(R.string.technology_result_empty).equals(msg)) {
                                 mView.getAgainRecycler();
-                            } else if (msg.contains(ResourceUtil.getString(R.string.code_network_connectionless))) {
+                            } else if (msg.contains(ResourceUtil.getString(R.string.technology_network_connectionless))) {
                                 mView.stopAnimation();
-                                mView.toastMessage(ResourceUtil.getString(R.string.code_network_connectionless_chinese));
+                                mView.toastMessage(ResourceUtil.getString(R.string.technology_network_connectionless_chinese));
                             } else {
                                 mView.stopAnimation();
                                 mView.toastMessage(msg);
@@ -138,8 +138,8 @@ public class EveryPresenter implements EveryContract.Presenter {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(i -> {
-                            if (msg.contains(ResourceUtil.getString(R.string.code_network_connectionless))) {
-                                Utils.showSnackBar(view, ResourceUtil.getString(R.string.code_network_connectionless_chinese));
+                            if (msg.contains(ResourceUtil.getString(R.string.technology_network_connectionless))) {
+                                Utils.showSnackBar(view, ResourceUtil.getString(R.string.technology_network_connectionless_chinese));
                             }
                             mView.stopAnimation();
                             Log.d("EveryPresenter", msg);

@@ -52,7 +52,7 @@ public class WelfareFragment extends BaseFragment implements WelfareContract.Vie
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.code_welfare_fragment, container, false);
+        View view = inflater.inflate(R.layout.technology_welfare_fragment, container, false);
 
         mWelfareRecycler = view.findViewById(R.id.welfare_recycler);
         mLoadingImage = view.findViewById(R.id.image_loading);
@@ -69,7 +69,7 @@ public class WelfareFragment extends BaseFragment implements WelfareContract.Vie
         if (mPresenter.getWelfareImageFromLocal() != null && mPresenter.getWelfareImageFromLocal().size() != 0) {
             mAdapter.update(mPresenter.getWelfareImageFromLocal());
         } else {
-            mPresenter.getWelfare(view, getString(R.string.code_welfare_chinese), page, 20);
+            mPresenter.getWelfare(view, getString(R.string.technology_welfare_chinese), page, 20);
         }
         mWelfareRecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -80,14 +80,14 @@ public class WelfareFragment extends BaseFragment implements WelfareContract.Vie
             @Override
             public void onLoadMore() {
                 page++;
-                mPresenter.getWelfare(view, getString(R.string.code_welfare_chinese), page, 20);
+                mPresenter.getWelfare(view, getString(R.string.technology_welfare_chinese), page, 20);
             }
         });
 
         mErrorBar.setOnClickListener(v -> {
             hideError();
             showLoading();
-            mPresenter.getWelfare(view, getString(R.string.code_welfare_chinese), page, 20);
+            mPresenter.getWelfare(view, getString(R.string.technology_welfare_chinese), page, 20);
         });
 
 
@@ -154,7 +154,7 @@ public class WelfareFragment extends BaseFragment implements WelfareContract.Vie
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_welfare_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_welfare_item, parent, false);
             return new ViewHolder(view);
         }
 

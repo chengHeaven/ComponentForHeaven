@@ -86,7 +86,7 @@ public class WelfareImageFragment extends BaseFragment implements WelfareImageCo
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.code_welfare_image_fragment, container, false);
+        View view = inflater.inflate(R.layout.technology_welfare_image_fragment, container, false);
 
         mViewPager = view.findViewById(R.id.welfare_image_fragment_viewpager);
         mIndicator = view.findViewById(R.id.welfare_image_viewpager_indicators);
@@ -261,7 +261,7 @@ public class WelfareImageFragment extends BaseFragment implements WelfareImageCo
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            @SuppressLint("InflateParams") View view = LayoutInflater.from(mContext).inflate(R.layout.code_welfare_image_item, null);
+            @SuppressLint("InflateParams") View view = LayoutInflater.from(mContext).inflate(R.layout.technology_welfare_image_item, null);
             mImage = view.findViewById(R.id.welfare_item_image);
             String path = mUrls.get(position);
             Glide.with(getActivity())

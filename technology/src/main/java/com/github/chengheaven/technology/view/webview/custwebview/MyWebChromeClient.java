@@ -78,7 +78,7 @@ public class MyWebChromeClient extends WebChromeClient {
     public View getVideoLoadingProgressView() {
         if (mXProgressVideo == null) {
             LayoutInflater inflater = LayoutInflater.from(mActivity);
-            mXProgressVideo = inflater.inflate(R.layout.code_video_loading_progress, null);
+            mXProgressVideo = inflater.inflate(R.layout.technology_video_loading_progress, null);
         }
         return mXProgressVideo;
     }

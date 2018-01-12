@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.github.chengheaven.componentlib.router.Router;
-import com.github.chengheaven.componentservice.service.code.TechnologyService;
+import com.github.chengheaven.componentservice.service.technology.TechnologyService;
 
 /**
  * @author Heaven_Cheng Created on 2017/12/26.

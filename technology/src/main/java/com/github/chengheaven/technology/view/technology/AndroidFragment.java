@@ -57,7 +57,7 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.code_android_fragment, container, false);
+        View view = inflater.inflate(R.layout.technology_android_fragment, container, false);
 
         mAndroidRecycler = view.findViewById(R.id.android_recycler);
 
@@ -74,27 +74,27 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
             hideLoading();
             mAdapter.refresh(mPresenter.getAndroidDataFromLocal());
         } else {
-            mPresenter.getAndroidData(view, null, getString(R.string.code_android), page, per);
+            mPresenter.getAndroidData(view, null, getString(R.string.technology_android), page, per);
         }
 
         mAndroidRecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 page = 1;
-                mPresenter.getAndroidData(view, null, getString(R.string.code_android), page, per);
+                mPresenter.getAndroidData(view, null, getString(R.string.technology_android), page, per);
             }
 
             @Override
             public void onLoadMore() {
                 page++;
-                mPresenter.getAndroidData(view, getString(R.string.code_refresh), getString(R.string.code_android), page, per);
+                mPresenter.getAndroidData(view, getString(R.string.technology_refresh), getString(R.string.technology_android), page, per);
             }
         });
 
         mErrorBar.setOnClickListener(v -> {
             hideError();
             showLoading();
-            mPresenter.getAndroidData(view, null, getString(R.string.code_android), page, 20);
+            mPresenter.getAndroidData(view, null, getString(R.string.technology_android), page, 20);
         });
 
         return view;
@@ -165,7 +165,7 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_android_fragment_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_android_fragment_item, parent, false);
             return new ViewHolder(view);
         }
 
@@ -192,7 +192,7 @@ public class AndroidFragment extends BaseFragment implements AndroidContract.Vie
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra("url", mList.get(position).getUrl());
-                intent.putExtra("title", getString(R.string.code_loading));
+                intent.putExtra("title", getString(R.string.technology_loading));
                 startActivity(intent);
             });
         }

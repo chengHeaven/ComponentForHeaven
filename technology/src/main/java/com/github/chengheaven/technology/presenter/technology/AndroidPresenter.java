@@ -73,8 +73,8 @@ public class AndroidPresenter implements AndroidContract.Presenter {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(i -> {
-                            if (msg.contains(ResourceUtil.getString(R.string.code_network_connectionless))) {
-                                Utils.showSnackBar(view, ResourceUtil.getString(R.string.code_network_connectionless_chinese));
+                            if (msg.contains(ResourceUtil.getString(R.string.technology_network_connectionless))) {
+                                Utils.showSnackBar(view, ResourceUtil.getString(R.string.technology_network_connectionless_chinese));
                             }
                             mView.hideLoading();
                             if (page == 1) {

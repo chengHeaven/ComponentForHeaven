@@ -70,7 +70,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.code_webview_activty);
+        setContentView(R.layout.technology_webview_activty);
         getIntentData();
         initTitle();
         initWebView();
@@ -118,7 +118,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.code_webview_menu, menu);
+        getMenuInflater().inflate(R.menu.technology_webview_menu, menu);
         return true;
     }
 

@@ -65,7 +65,7 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.code_every_fragment, container, false);
+        View view = inflater.inflate(R.layout.technology_every_fragment, container, false);
 
         mLoadingImage = view.findViewById(R.id.loading_image);
         mLoading = view.findViewById(R.id.loading);
@@ -191,13 +191,13 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
             View view;
             switch (viewType) {
                 case HEADER:
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_header, parent, false);
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_header, parent, false);
                     return new HeaderViewHolder(view);
                 case RECYCLER:
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_recycler, parent, false);
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_recycler, parent, false);
                     return new RecyclerViewHolder(view);
                 case BOTTOM:
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_bottom, parent, false);
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_bottom, parent, false);
                     return new BottomViewHolder(view);
                 default:
                     break;
@@ -240,10 +240,10 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
             HeaderViewHolder(View itemView) {
                 super(itemView);
-                mBanner = itemView.findViewById(R.id.code_home_every_banner);
-                mXian = itemView.findViewById(R.id.code_home_every_xd);
-                mDaily = itemView.findViewById(R.id.code_home_daily_btn);
-                mMovieHot = itemView.findViewById(R.id.code_home_every_hot);
+                mBanner = itemView.findViewById(R.id.technology_home_every_banner);
+                mXian = itemView.findViewById(R.id.technology_home_every_xd);
+                mDaily = itemView.findViewById(R.id.technology_home_daily_btn);
+                mMovieHot = itemView.findViewById(R.id.technology_home_every_hot);
 
                 mXian.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
@@ -254,7 +254,7 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
                 mDaily.setOnClickListener(v -> {
                     RxCustomer msg = new RxCustomer();
-                    msg.setType(getString(R.string.code_all));
+                    msg.setType(getString(R.string.technology_all));
                     RxBus.getDefault().post(msg);
                     RxPosition msgPosition = new RxPosition();
                     msgPosition.setPosition(2);
@@ -275,7 +275,7 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
             RecyclerViewHolder(View itemView) {
                 super(itemView);
-                mRecycler = itemView.findViewById(R.id.code_home_every_recycler);
+                mRecycler = itemView.findViewById(R.id.technology_home_every_recycler);
             }
         }
 
@@ -285,7 +285,7 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
             BottomViewHolder(View itemView) {
                 super(itemView);
-                mChangeItem = itemView.findViewById(R.id.code_home_change_item);
+                mChangeItem = itemView.findViewById(R.id.technology_home_change_item);
             }
         }
     }
@@ -311,7 +311,7 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_every_recycler_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_every_recycler_item, parent, false);
             return new ViewHolder(view);
         }
 
@@ -386,11 +386,11 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
             ViewHolder(View itemView) {
                 super(itemView);
-                mTitleImage = itemView.findViewById(R.id.code_title_image);
-                mTitleText = itemView.findViewById(R.id.code_title_text);
-                mMore = itemView.findViewById(R.id.code_tv_more);
-                mTitleImageMore = itemView.findViewById(R.id.code_title_image_more);
-                mItemRecycler = itemView.findViewById(R.id.code_item_recycler);
+                mTitleImage = itemView.findViewById(R.id.technology_title_image);
+                mTitleText = itemView.findViewById(R.id.technology_title_text);
+                mMore = itemView.findViewById(R.id.technology_tv_more);
+                mTitleImageMore = itemView.findViewById(R.id.technology_title_image_more);
+                mItemRecycler = itemView.findViewById(R.id.technology_item_recycler);
             }
 
             public void setVisibility(boolean visible) {
@@ -421,13 +421,13 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_recycler_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_recycler_item, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            if (mList.get(position).getType().contains(getString(R.string.code_welfare))) {
+            if (mList.get(position).getType().contains(getString(R.string.technology_welfare))) {
                 Glide.with(getActivity())
                         .load(mList.get(position).getUrl())
                         .placeholder(R.drawable.img_two_bi_one)
@@ -502,8 +502,8 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
 
             ViewHolder(View itemView) {
                 super(itemView);
-                mImage = itemView.findViewById(R.id.code_recycler_item_image);
-                mText = itemView.findViewById(R.id.code_recycler_item_text);
+                mImage = itemView.findViewById(R.id.technology_recycler_item_image);
+                mText = itemView.findViewById(R.id.technology_recycler_item_text);
             }
         }
     }

@@ -47,7 +47,7 @@ public class WelfareImageActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.code_welfare_image_act;
+        return R.layout.technology_welfare_image_act;
     }
 
     @Override

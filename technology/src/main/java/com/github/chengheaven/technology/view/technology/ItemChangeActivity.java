@@ -34,7 +34,7 @@ public class ItemChangeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mToolbar = findViewById(R.id.toolbar);
-        mToolbar.setTitle(getString(R.string.code_change_item));
+        mToolbar.setTitle(getString(R.string.technology_change_item));
         setSupportActionBar(mToolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,7 +76,7 @@ public class ItemChangeActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.code_item_change_activity;
+        return R.layout.technology_item_change_activity;
     }
 
     class ItemChangeAdapter extends RecyclerView.Adapter<ItemChangeAdapter.ViewHolder> {
@@ -89,7 +89,7 @@ public class ItemChangeActivity extends BaseActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.code_item_change_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.technology_item_change_item, parent, false);
             return new ViewHolder(view);
         }
 

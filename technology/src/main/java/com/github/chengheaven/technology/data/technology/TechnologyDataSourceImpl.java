@@ -78,7 +78,7 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
                     //noinspection unchecked
                     callback.onSuccess(urls);
                 } catch (Exception e) {
-                    callback.onFailed(ResourceUtil.getString(R.string.code_request_data_failure));
+                    callback.onFailed(ResourceUtil.getString(R.string.technology_request_data_failure));
                     e.printStackTrace();
                 }
             }
@@ -108,15 +108,15 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
                             .replaceAll("拓展资源", "Expand")
                             .replaceAll("瞎推荐", "Recommend");
                     JSONObject jsonObject = new JSONObject(result);
-                    boolean code = jsonObject.getBoolean("error");
-                    if (code) {
+                    boolean technology = jsonObject.getBoolean("error");
+                    if (technology) {
                         String message = jsonObject.getString("error");
                         callback.onFailed(message);
                         return;
                     }
 
                     if ("{}".equals(jsonObject.getString("results"))) {
-                        callback.onFailed(ResourceUtil.getString(R.string.code_result_empty));
+                        callback.onFailed(ResourceUtil.getString(R.string.technology_result_empty));
                         return;
                     }
 
@@ -151,7 +151,7 @@ public class TechnologyDataSourceImpl implements TechnologyDataSource {
                     setHomeList(homeList);
                     callback.onSuccess(homeList);
                 } catch (Exception e) {
-                    callback.onFailed(ResourceUtil.getString(R.string.code_request_data_failure));
+                    callback.onFailed(ResourceUtil.getString(R.string.technology_request_data_failure));
                     e.printStackTrace();
                 }
             }
