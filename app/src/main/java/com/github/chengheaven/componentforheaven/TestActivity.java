@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
 import com.github.chengheaven.componentlib.router.Router;
+import com.github.chengheaven.componentlib.router.ui.UIRouter;
 import com.github.chengheaven.componentservice.service.technology.TechnologyService;
 
 /**
@@ -21,6 +23,12 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
+
+        Button btn = findViewById(R.id.btn);
+        btn.setOnClickListener(v -> {
+            Router.registerComponent(getApplicationContext(), "com.github.chengheaven.movie.app.MovieApp");
+            UIRouter.getInstance().openUri(TestActivity.this, "component://movie", null);
+        });
 
         Router router = Router.getInstance();
 

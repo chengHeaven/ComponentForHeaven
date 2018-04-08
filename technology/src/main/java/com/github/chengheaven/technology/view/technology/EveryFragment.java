@@ -17,20 +17,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.chengheaven.componentlib.router.Router;
+import com.github.chengheaven.componentlib.router.ui.UIRouter;
 import com.github.chengheaven.componentservice.utils.GlideImageLoader;
 import com.github.chengheaven.componentservice.utils.RxBus;
 import com.github.chengheaven.componentservice.utils.SharedPreferenceUtil;
 import com.github.chengheaven.componentservice.utils.TimeUtil;
 import com.github.chengheaven.componentservice.view.BaseFragment;
 import com.github.chengheaven.componentservice.view.BasePresenter;
+import com.github.chengheaven.componentservice.view.webview.WebViewActivity;
 import com.github.chengheaven.technology.R;
+import com.github.chengheaven.technology.app.TechnologyApp;
 import com.github.chengheaven.technology.bean.HomeBean;
 import com.github.chengheaven.technology.bean.rx.RxCustomer;
 import com.github.chengheaven.technology.bean.rx.RxDaily;
 import com.github.chengheaven.technology.bean.rx.RxPosition;
 import com.github.chengheaven.technology.constants.Constants;
 import com.github.chengheaven.technology.presenter.technology.EveryContract;
-import com.github.chengheaven.technology.view.webview.WebViewActivity;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -265,6 +268,9 @@ public class EveryFragment extends BaseFragment implements EveryContract.View {
                     RxDaily rxDaily = new RxDaily();
                     rxDaily.setPosition(1);
                     RxBus.getDefault().post(rxDaily);
+                    Router.registerComponent(TechnologyApp.getInstance().mContext, "com.github.chengheaven.movie.app.MovieApp");
+                    UIRouter.getInstance().openUri(getActivity(), "component://movie", null);
+                    getActivity().overridePendingTransition(0, 0);
                 });
             }
         }

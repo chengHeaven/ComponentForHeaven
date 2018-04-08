@@ -7,7 +7,7 @@ import com.github.chengheaven.componentlib.app.IApp;
 import com.github.chengheaven.componentlib.router.Router;
 import com.github.chengheaven.componentlib.router.ui.UIRouter;
 import com.github.chengheaven.componentservice.service.technology.TechnologyService;
-import com.github.chengheaven.technology.compouirouter.TechnologyUIRouter;
+import com.github.chengheaven.technology.componuirouter.TechnologyUIRouter;
 import com.github.chengheaven.technology.di.component.DaggerDataRepositoryComponent;
 import com.github.chengheaven.technology.di.component.DataRepositoryComponent;
 import com.github.chengheaven.technology.di.module.ApplicationModule;

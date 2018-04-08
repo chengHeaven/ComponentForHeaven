@@ -1,40 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/add_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorTheme"
+        app:contentInsetStart="0.0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarStyle">
 
-    <Button
-        android:id="@+id/intent_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_movie"
-        android:text="intent" />
+        <FrameLayout
+            android:id="@+id/ll_title_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-    <Button
-        android:id="@+id/add_intent_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/intent_movie"
-        android:text="add_intent" />
+            <ImageView
+                android:id="@+id/title_menu"
+                android:layout_width="23dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@+id/title_menu"
+                android:src="@drawable/titlebar_menu" />
+        </FrameLayout>
 
-    <Button
-        android:id="@+id/delete_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="delete" />
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:theme="@style/AppTheme">
+
+                <ImageView
+                    android:id="@+id/title_gank"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@+id/title_gank"
+                    android:src="@drawable/titlebar_disco" />
+
+                <ImageView
+                    android:id="@+id/title_movie"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@+id/title_movie"
+                    android:src="@drawable/titlebar_music" />
+
+                <ImageView
+                    android:id="@+id/title_book"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@+id/title_book"
+                    android:src="@drawable/titlebar_friends" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <RelativeLayout
+            android:id="@+id/ll_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/about"
+                android:src="@drawable/actionbar_search" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
-        android:id="@+id/main_content"
+        android:id="@+id/gank_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/movie_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/book_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</LinearLayout>

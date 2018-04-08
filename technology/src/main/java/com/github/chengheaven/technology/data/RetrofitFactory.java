@@ -34,7 +34,6 @@ public class RetrofitFactory {
     private static ApiService sGankInstance;
     private static ApiService sDouBanInstance;
     private static ApiService sTingInstance;
-    private static RetrofitFactory instance;
     private static OkHttpClient sOkHttpClient = getOkHttpClient();
 
     public static ApiService getGankInstance() {

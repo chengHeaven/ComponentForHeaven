@@ -9,4 +9,6 @@
     <string name="listview_header_hint_normal">下拉刷新&#8230;</string>
     <string name="listview_header_hint_release">释放刷新&#8230;</string>
     <string name="action_share">分享</string>
+    <string name="copy_url">复制链接</string>
+    <string name="open_url">打开链接</string>
 </resources>

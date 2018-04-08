@@ -7,15 +7,14 @@ import com.github.chengheaven.componentlib.app.IApp;
 import com.github.chengheaven.componentlib.router.Router;
 import com.github.chengheaven.componentlib.router.ui.UIRouter;
 import com.github.chengheaven.componentservice.service.movie.MovieService;
-import com.github.chengheaven.componentservice.service.technology.TechnologyService;
-import com.github.chengheaven.movie.compouirouter.MovieUIRouter;
+import com.github.chengheaven.movie.componuirouter.MovieUIRouter;
 import com.github.chengheaven.movie.di.component.DaggerDataRepositoryComponent;
 import com.github.chengheaven.movie.di.component.DataRepositoryComponent;
 import com.github.chengheaven.movie.di.module.ApplicationModule;
 import com.github.chengheaven.movie.serviceimpl.MovieServiceImpl;
 
 /**
- * @author Heaven_Cheng Created on 2018/1/12.
+ * @author Heaven_Cheng Created on 2017/12/25.
  */
 public class MovieApp extends Application implements IApp {
 
@@ -23,7 +22,7 @@ public class MovieApp extends Application implements IApp {
     private UIRouter mUIRouter = UIRouter.getInstance();
     private MovieUIRouter mMovieUIRouter = MovieUIRouter.getInstance();
     private DataRepositoryComponent mDataRepositoryComponent;
-    private Context mContext;
+    public Context mContext;
     private static MovieApp sInstance;
 
     @Override
@@ -41,7 +40,7 @@ public class MovieApp extends Application implements IApp {
     @Override
     public void stop() {
         mUIRouter.unregisterUI(mMovieUIRouter);
-        mRouter.removeService(TechnologyService.class.getSimpleName());
+        mRouter.removeService(MovieService.class.getSimpleName());
     }
 
     public static MovieApp getInstance() {

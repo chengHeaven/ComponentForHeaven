@@ -12,6 +12,9 @@ import com.github.chengheaven.movie.presenter.MoviePresenter;
 
 import javax.inject.Inject;
 
+/**
+ * @author Heaven・Cheng Created on 2018/1/19.
+ */
 public class MovieActivity extends AppCompatActivity {
 
     @Inject
@@ -35,5 +38,11 @@ public class MovieActivity extends AppCompatActivity {
                 .movieModule(new MovieModule(movieFragment))
                 .build()
                 .inject(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
     }
 }

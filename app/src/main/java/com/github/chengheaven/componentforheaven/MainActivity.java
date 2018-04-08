@@ -4,104 +4,129 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.github.chengheaven.componentlib.router.Router;
-import com.github.chengheaven.componentlib.router.ui.UIRouter;
-import com.github.chengheaven.componentservice.service.news.NewsService;
+import com.github.chengheaven.componentservice.service.book.BookService;
+import com.github.chengheaven.componentservice.service.movie.MovieService;
+import com.github.chengheaven.componentservice.service.technology.TechnologyService;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    Fragment fragment;
-    FragmentTransaction ft;
-    //    @BindView(R.id.add_movie)
-    Button add;
-    //    @BindView(R.id.intent_movie)
-    Button intent;
-    //    @BindView(R.id.add_intent_movie)
-    Button add_intent;
-    //    @BindView(R.id.delete_movie)
-    Button delete;
+public class MainActivity extends AppCompatActivity {
 
-    NewsService service;
+    @BindView(R.id.title_menu)
+    ImageView mTitleMenu;
+    @BindView(R.id.ll_title_menu)
+    FrameLayout mLlTitleMenu;
+    @BindView(R.id.title_gank)
+    ImageView mTitleGank;
+    @BindView(R.id.title_movie)
+    ImageView mTitleMovie;
+    @BindView(R.id.title_book)
+    ImageView mTitleBook;
+    @BindView(R.id.ll_search)
+    RelativeLayout mLlSearch;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.gank_content)
+    FrameLayout mGankContent;
+    @BindView(R.id.movie_content)
+    FrameLayout mMovieContent;
+    @BindView(R.id.book_content)
+    FrameLayout mBookContent;
+
+    FragmentTransaction mFt;
+    Fragment mTsFragment;
+    Fragment mMsFragment;
+    Fragment mBsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-//        ButterKnife.bind(this);
-
-        add = findViewById(R.id.add_movie);
-        delete = findViewById(R.id.delete_movie);
-        intent = findViewById(R.id.intent_movie);
-        add_intent = findViewById(R.id.add_intent_movie);
-
-        add.setOnClickListener(this);
-        delete.setOnClickListener(this);
-        intent.setOnClickListener(this);
-        add_intent.setOnClickListener(this);
+        ButterKnife.bind(this);
 
         Router router = Router.getInstance();
 
-        if (fragment != null) {
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.remove(fragment).commit();
-            fragment = null;
+        if (mTsFragment != null) {
+            mFt = getSupportFragmentManager().beginTransaction();
+            mFt.remove(mTsFragment).commitAllowingStateLoss();
+            mTsFragment = null;
         }
 
-        if (router.getService(NewsService.class.getSimpleName()) != null) {
-            service = (NewsService) router.getService(NewsService.class.getSimpleName());
-            fragment = service.getNewsFragment();
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.main_content, fragment).commitAllowingStateLoss();
+        if (router.getService(TechnologyService.class.getSimpleName()) != null) {
+            TechnologyService ts = (TechnologyService) router.getService(TechnologyService.class.getSimpleName());
+            mTsFragment = ts.getTechnologyFragment();
+            mFt = getSupportFragmentManager().beginTransaction();
+            mFt.add(R.id.gank_content, mTsFragment).commitAllowingStateLoss();
+        }
+
+        if (mMsFragment != null) {
+            mFt = getSupportFragmentManager().beginTransaction();
+            mFt.remove(mMsFragment).commitAllowingStateLoss();
+            mMsFragment = null;
+        }
+
+        if (router.getService(MovieService.class.getSimpleName()) != null) {
+            MovieService ms = (MovieService) router.getService(MovieService.class.getSimpleName());
+            mMsFragment = ms.getMovieBaseFragment();
+            mFt = getSupportFragmentManager().beginTransaction();
+            mFt.add(R.id.movie_content, mMsFragment).commitAllowingStateLoss();
+        }
+
+        if (mBsFragment != null) {
+            mFt = getSupportFragmentManager().beginTransaction();
+            mFt.remove(mBsFragment).commitAllowingStateLoss();
+            mBsFragment = null;
+        }
+
+        if (router.getService(BookService.class.getSimpleName()) != null) {
+            BookService bs = (BookService) router.getService(BookService.class.getSimpleName());
+            mBsFragment = bs.getBookBaseFragment();
+            mFt = getSupportFragmentManager().beginTransaction();
+            mFt.add(R.id.book_content, mBsFragment).commitAllowingStateLoss();
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (service != null) {
-            service.resume();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (service != null) {
-            service.pause();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (service != null) {
-            service.destroy();
-        }
-    }
-
-    @Override
+    @OnClick({R.id.title_gank, R.id.title_movie, R.id.title_book})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.add_movie:
-                Router.registerComponent(getApplicationContext(), "com.github.chengheaven.news.app.NewsApp");
+            case R.id.title_gank:
+                mGankContent.setVisibility(View.VISIBLE);
+                mMovieContent.setVisibility(View.GONE);
+                mBookContent.setVisibility(View.GONE);
+
+                //if intent activity
+//                Router.registerComponent(getApplicationContext(), "com.github.chengheaven.technology.app.TechnologyApp");
+//                UIRouter.getInstance().openUri(MainActivity.this, "component://technology", null);
                 break;
 
-            case R.id.intent_movie:
-                UIRouter.getInstance().openUri(MainActivity.this, "component://news", null);
+            case R.id.title_movie:
+                mGankContent.setVisibility(View.GONE);
+                mMovieContent.setVisibility(View.VISIBLE);
+                mBookContent.setVisibility(View.GONE);
+
+                //if intent activity
+//                Router.registerComponent(getApplicationContext(), "com.github.chengheaven.movie.app.MovieApp");
+//                UIRouter.getInstance().openUri(MainActivity.this, "component://movie", null);
                 break;
 
-            case R.id.add_intent_movie:
-                Router.registerComponent(getApplicationContext(), "com.github.chengheaven.news.app.NewsApp");
-                UIRouter.getInstance().openUri(MainActivity.this, "component://news", null);
-                break;
+            case R.id.title_book:
+                mGankContent.setVisibility(View.GONE);
+                mMovieContent.setVisibility(View.GONE);
+                mBookContent.setVisibility(View.VISIBLE);
 
-            case R.id.delete_movie:
-                Router.unregisterComponent("com.github.chengheaven.news.app.NewsApp");
+                //if intent activity
+//                Router.registerComponent(getApplicationContext(), "com.github.chengheaven.book.app.BookApp");
+//                UIRouter.getInstance().openUri(MainActivity.this, "component://book", null);
                 break;
 
             default:

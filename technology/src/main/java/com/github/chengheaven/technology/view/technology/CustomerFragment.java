@@ -20,10 +20,10 @@ import com.cocosw.bottomsheet.BottomSheet;
 import com.github.chengheaven.componentservice.customer.XRecyclerView.XRecyclerView;
 import com.github.chengheaven.componentservice.view.BaseFragment;
 import com.github.chengheaven.componentservice.view.BasePresenter;
+import com.github.chengheaven.componentservice.view.webview.WebViewActivity;
 import com.github.chengheaven.technology.R;
 import com.github.chengheaven.technology.bean.GankData;
 import com.github.chengheaven.technology.presenter.technology.CustomerContract;
-import com.github.chengheaven.technology.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;

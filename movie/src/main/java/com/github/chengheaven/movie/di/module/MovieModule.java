@@ -6,7 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * @author Heaven_Cheng Created on 2018/1/12.
+ * @author Heaven_Cheng Created on 2017/12/27.
  */
 @Module
 public class MovieModule {

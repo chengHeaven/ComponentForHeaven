@@ -6,7 +6,7 @@ import com.github.chengheaven.componentservice.view.BaseView;
 import java.util.List;
 
 /**
- * @author Heaven_Cheng Created on 2018/1/8.
+ * @author Heaven_Cheng Created on 2017/12/25.
  */
 public interface WelfareImageContract {
 

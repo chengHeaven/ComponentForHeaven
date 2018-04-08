@@ -6,7 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * @author Heaven_Cheng Created on 2018/1/8.
+ * @author Heaven_Cheng Created on 2017/12/25.
  */
 @Module
 public class WelfareImageModule {

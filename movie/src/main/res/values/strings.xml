@@ -1,3 +1,8 @@
 <resources>
     <string name="movie_app_name">movie</string>
+    <string name="movie_director">导演：</string>
+    <string name="movie_performer">主演：</string>
+    <string name="movie_more_info">更多信息</string>
+    <string name="movie_network_connectionless">No address associated with hostname</string>
+    <string name="movie_network_connectionless_chinese">网络无连接</string>
 </resources>

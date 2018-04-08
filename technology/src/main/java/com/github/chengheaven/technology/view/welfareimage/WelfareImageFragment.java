@@ -51,7 +51,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author Heaven_Cheng Created on 2018/1/8.
+ * @author Heaven_Cheng Created on 2017/12/25.
  */
 public class WelfareImageFragment extends BaseFragment implements WelfareImageContract.View, ViewPager.OnPageChangeListener {
 

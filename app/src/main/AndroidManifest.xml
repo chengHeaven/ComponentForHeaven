@@ -8,19 +8,20 @@
     <application
         android:name="com.github.chengheaven.componentforheaven.application.AppApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_cloudreader_mip"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_cloudreader_mip"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
-        <activity android:name=".TestActivity">
+        <activity android:name=".OneActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--<activity android:name=".OneActivity" />-->
         <!--<activity android:name=".TestActivity" />-->
     </application>
 

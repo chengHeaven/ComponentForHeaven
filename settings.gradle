@@ -1,4 +1,4 @@
-include ':app', ':movie', ':technology'
+include ':app', ':movie', ':technology', ':book'
 include ':news'
 
 

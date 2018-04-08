@@ -1,10 +1,14 @@
 package com.github.chengheaven.movie.data;
 
+import com.github.chengheaven.movie.bean.MovieBean;
+import com.github.chengheaven.movie.bean.MovieDetailBean;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * @author Heaven・Cheng Created on 17/4/18.
@@ -18,6 +22,10 @@ public interface ApiService {
     @GET("v2/movie/in_theaters")
     Call<ResponseBody> getHotMovie();
 
+    @GET("v2/movie/in_theaters")
+    Observable<MovieBean> requestHotMovie();
+
+
     /**
      * 获取电影详情
      *
@@ -25,6 +33,10 @@ public interface ApiService {
      */
     @GET("v2/movie/subject/{id}")
     Call<ResponseBody> getMovieDetail(@Path("id") String id);
+
+
+    @GET("v2/movie/subject/{id}")
+    Observable<MovieDetailBean> requestMovieDetail(@Path("id") String id);
 
     /**
      * 获取豆瓣电影top250
@@ -34,4 +46,7 @@ public interface ApiService {
      */
     @GET("v2/movie/top250")
     Call<ResponseBody> getMovieTop250(@Query("start") int start, @Query("count") int count);
+
+    @GET("v2/movie/top250")
+    Observable<MovieBean> requestMovieTop250(@Query("start") int start, @Query("count") int count);
 }

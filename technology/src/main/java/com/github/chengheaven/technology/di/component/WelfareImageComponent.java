@@ -7,7 +7,7 @@ import com.github.chengheaven.componentservice.view.FragmentScoped;
 import dagger.Component;
 
 /**
- * @author Heaven_Cheng Created on 2018/1/8.
+ * @author Heaven_Cheng Created on 2017/12/25.
  */
 @FragmentScoped
 @Component(dependencies = DataRepositoryComponent.class, modules = WelfareImageModule.class)

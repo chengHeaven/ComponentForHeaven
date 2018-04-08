@@ -21,8 +21,9 @@ public class AppApplication extends Application {
 //        Router.registerComponent(getApplicationContext(),
 //                "com.github.chengheaven.news.app.NewsApp");
 
-        Router.registerComponent(getApplicationContext(),
-                "com.github.chengheaven.technology.app.TechnologyApp");
+        Router.registerComponent(getApplicationContext(), "com.github.chengheaven.technology.app.TechnologyApp");
+        Router.registerComponent(getApplicationContext(), "com.github.chengheaven.movie.app.MovieApp");
+        Router.registerComponent(getApplicationContext(), "com.github.chengheaven.book.app.BookApp");
     }
 
 

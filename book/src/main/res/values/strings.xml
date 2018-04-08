@@ -1,0 +1,8 @@
+<resources>
+    <string name="book_app_name">Book</string>
+    <string name="book_network_connectionless">No address associated with hostname</string>
+    <string name="book_network_connectionless_chinese">网络无连接</string>
+    <string name="book_book">book</string>
+    <string name="book_more_info">更多信息</string>
+    <string name="book_refresh">刷新</string>
+</resources>
